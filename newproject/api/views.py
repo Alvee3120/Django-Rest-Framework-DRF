@@ -103,18 +103,30 @@
 
 # Generic Class Based View
 
-from rest_framework import generics
+# from rest_framework import generics
+# from .models import DB_USER
+# from .serializer import UserSerializer
+
+
+# class UserList(generics.ListCreateAPIView):
+#     """List all users, or create a new user."""
+#     queryset = DB_USER.objects.all()
+#     serializer_class = UserSerializer
+
+
+# class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+#     """ Retrieve, update, or delete a user instance."""
+#     queryset = DB_USER.objects.all()
+#     serializer_class = UserSerializer
+
+
+# Viewset 
+
+from rest_framework import viewsets
 from .models import DB_USER
 from .serializer import UserSerializer
 
-
-class UserList(generics.ListCreateAPIView):
-    """List all users, or create a new user."""
+class UserViewSet(viewsets.ModelViewSet):
     queryset = DB_USER.objects.all()
     serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    """ Retrieve, update, or delete a user instance."""
-    queryset = DB_USER.objects.all()
-    serializer_class = UserSerializer
+    

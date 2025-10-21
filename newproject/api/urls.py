@@ -14,13 +14,26 @@
 
 # Class Based View
 
-from django.urls import path
-from .views import UserList, UserDetail
+# from django.urls import path
+# from .views import UserList, UserDetail
+
+# urlpatterns = [
+#     # List all users OR create a new user
+#     path('users/', UserList.as_view(), name='user_list'),
+
+#     # Retrieve, update, or delete a specific user
+#     path('users/<int:pk>/', UserDetail.as_view(), name='user_detail'),
+# ]
+
+# Routers
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import UserViewSet
+
+router = DefaultRouter()
+router.register(r'users',UserViewSet, basename='user')
 
 urlpatterns = [
-    # List all users OR create a new user
-    path('users/', UserList.as_view(), name='user_list'),
 
-    # Retrieve, update, or delete a specific user
-    path('users/<int:pk>/', UserDetail.as_view(), name='user_detail'),
+    path('',include(router.urls)),
 ]

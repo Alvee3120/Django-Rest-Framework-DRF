@@ -270,3 +270,34 @@ And also now we can add data by build in form
 
 ![alt text](image-4.png)
 ![alt text](image-5.png)
+
+#### ViewSets & Routers
+
+Here we got more simplified version
+just replace the views.py with
+
+```py
+from rest_framework import viewsets
+from .models import DB_USER
+from .serializer import UserSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = DB_USER.objects.all()
+    serializer_class = UserSerializer
+```
+
+And change the urls.py with
+
+```py
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import UserViewSet
+
+router = DefaultRouter()
+router.register(r'users',UserViewSet, basename='user')
+
+urlpatterns = [
+
+    path('',include(router.urls)),
+]
+```
