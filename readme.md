@@ -301,3 +301,107 @@ urlpatterns = [
     path('',include(router.urls)),
 ]
 ```
+
+Now We've successfully created our USER Api
+
+### Frontend
+
+Now let's fetch the data from the api and Display it for That we use React
+
+first in DRF/newproject we create our React App
+so that our newproject , Api , Frontend are stay at the same level
+
+To create the React App
+
+```bash
+npm create vite@latest frontend
+```
+
+Then choose react and javascript
+
+```bash
+cd frontend
+```
+
+Now Install npm
+
+```bash
+npm install
+```
+
+Then run it
+
+```bash
+npm run dev
+```
+
+We've Created the React App
+
+#### Connect the API with frontend
+
+For connecting the frontend with api
+we need to open E:\Django\DRF\newproject\newproject\settings.py and Add
+
+```py
+INSTALLED_APPS = [
+   ...
+   'corsheaders',
+]
+
+MIDDLEWARE = [
+   ...
+   'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+   "http://localhost:5173",
+]
+
+```
+
+Now to display data we customize our App.jsx file to this
+
+```js
+function App() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/users/")
+      .then((res) => res.json())
+      .then((data) => setUsers(data))
+      .catch((err) => console.error("Error fetching users:", err));
+  }, []);
+
+  return (
+    <div>
+      <h1>Users List</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            {user.id} - {user.name} - {user.age}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+Now We are all Done
+Just we need to run both python and react server
+
+To run python server DRF\newproject\
+
+```bash
+python manage.py runserver
+```
+
+To run react E:\Django\DRF\newproject\frontend\
+
+```bash
+npm run dev
+```
+
+Now Visit http://localhost:5173 for seeing the data
+
+### Thank you for reading. If you find it helpful give a star it motivates me !
