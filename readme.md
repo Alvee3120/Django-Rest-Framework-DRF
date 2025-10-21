@@ -404,4 +404,6 @@ npm run dev
 
 Now Visit http://localhost:5173 for seeing the data
 
+![alt text](image-6.png)
+
 ### Thank you for reading. If you find it helpful give a star it motivates me !
