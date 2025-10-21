@@ -1,9 +1,26 @@
+# Function Based View
+
+# from django.urls import path
+# from .views import get_user,create_user,user_details
+
+# urlpatterns = [
+#     path('users/', get_user, name = 'get_user'),
+#     path('users/create', create_user, name = 'create_user'),
+#     path('users/<int:pk>', user_details, name = 'user_details')
+
+# ]
+
+
+
+# Class Based View
+
 from django.urls import path
-from .views import get_user,create_user,user_details
+from .views import UserList, UserDetail
 
 urlpatterns = [
-    path('users/', get_user, name = 'get_user'),
-    path('users/create', create_user, name = 'create_user'),
-    path('users/<int:pk>', user_details, name = 'user_details')
+    # List all users OR create a new user
+    path('users/', UserList.as_view(), name='user_list'),
 
+    # Retrieve, update, or delete a specific user
+    path('users/<int:pk>/', UserDetail.as_view(), name='user_detail'),
 ]
